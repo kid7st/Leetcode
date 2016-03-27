@@ -1,3 +1,7 @@
+/*
+ * Hash table, sort the string as key
+ * Time complexity: O(N^2)
+ */
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
