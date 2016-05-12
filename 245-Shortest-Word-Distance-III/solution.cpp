@@ -14,8 +14,8 @@ public:
         int ret = words.size();
         for(int i = 0; i < pos1.size(); i++){
             for(int j = 0; j < pos2.size(); j++){
-                if(pos1 - pos2 != 0){
-                    int current = pos1 - pos2;
+                if(pos1[i] - pos2[j] != 0){
+                    int current = pos1[i] - pos2[j];
                     if(current < 0)
                         current = -current;
                     if(current < ret)
