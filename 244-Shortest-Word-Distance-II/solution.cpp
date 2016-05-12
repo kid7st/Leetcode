@@ -14,7 +14,7 @@ public:
     }
 
     int shortest(string word1, string word2) {
-        int ret = 
+        int ret = words_size;
         for(int i = 0; i<positionMap[word1].size(); i++){
             for(int j = 0; j<postionMap[word2].size(); j++){
                 int current = positionMap[word1][i] - positionMap[word2][j];
