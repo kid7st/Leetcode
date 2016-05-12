@@ -4,7 +4,7 @@ public:
         words_size = words.size();
         for(int i = 0; i<words.size(); i++){
             if(positionMap.count(words[i]) == 0){
-                vector<int> postions;
+                vector<int> positions;
                 positions.push_back(i);
                 positionMap[words[i]] = positions;
             }else{
