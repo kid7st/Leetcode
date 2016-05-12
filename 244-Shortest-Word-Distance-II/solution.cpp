@@ -24,6 +24,7 @@ public:
                     ret = current;
             }
         }
+        return ret;
     }
 private:
     int words_size;
