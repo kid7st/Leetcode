@@ -10,42 +10,23 @@
 class Solution {
 public:
     int rob(TreeNode* root) {
-        vector<TreeNode*> next;
-        next.push_back(root);
-        robbedCount = 0;
-        norobbedCount = 0;
-        bfs(next);
-        
-        if(robbedCount > norobbedCount)
-            return robbedCount;
-        else
-            return norobbedCount;
+        if(dfsRob(root, true) > dfsRob(root, false)){
+            return dfsRob(root, true);
+        }else{
+            return dfsRob(root, false);
+        }
     }
    
 private:
-    int robbedCount, norobbedCount;
-    
-    void bfs(vector<TreeNode*> nodes){
-        vector<TreeNode*> next;
-        int newRobbedCount = norobbedCount;
-        int newNorobbedCount = robbedCount;
-        
-        for(int i = 0; i < nodes.size(); i++){
-            newRobbedCount += nodes[i]->val;
+    int dfsRob(TreeNode* root, bool robbed) {
+        if(root == NULL)
+            return 0;
             
-            if(nodes[i]->left != NULL){
-                next.push_back(nodes[i]->left);
-            }
-            if(nodes[i]->right != NULL){
-                next.push_back(nodes[i]->right);
-            }
-        }
-        
-        robbedCount = newRobbedCount;
-        norobbedCount = newNorobbedCount;
-        
-        if(!next.empty()){
-            bfs(next);
+        if(robbed){
+            return root->val + dfsRob(root->left, false) + dfsRob(root->right, false);
+        }else{
+            return max(dfsRob(root->left, true), dfsRob(root->left, false)) + 
+                        max(dfsRob(root->right, true), dfsRob(root->right, false));
         }
     }
 };
