@@ -16,17 +16,27 @@ public:
             return dfsRob(root, false);
         }
     }
+    
+unordered_map<TreeNode*, int> robbedCount;
+unordered_map<TreeNode*, int> unrobbedCount;
    
 private:
     int dfsRob(TreeNode* root, bool robbed) {
         if(root == NULL)
             return 0;
             
+        if(robbed && robbedCount.count(root) > 0)
+            return robbedCount[root];
+        if(!robbed && unrobbedCount.count(root) > 0)
+            return unrobbedCount[root];
+            
         if(robbed){
-            return root->val + dfsRob(root->left, false) + dfsRob(root->right, false);
+            robbedCount[root] = root->val + dfsRob(root->left, false) + dfsRob(root->right, false);
+            return robbedCount[root];
         }else{
-            return max(dfsRob(root->left, true), dfsRob(root->left, false)) + 
+            unrobbedCount[root] = max(dfsRob(root->left, true), dfsRob(root->left, false)) + 
                         max(dfsRob(root->right, true), dfsRob(root->right, false));
+            return unrobbedCount[root];
         }
     }
 };
