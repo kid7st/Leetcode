@@ -8,16 +8,16 @@ public:
         return res;
     }
 private:
-    bool find(vector<int>& candidates, int target, int k, vector<int> &current, vector<vector<int>> &res){
+    void find(vector<int>& candidates, int target, int k, vector<int> &current, vector<vector<int>> &res){
         if(target == 0){
-            return true;
+            res.push_back(current);
         }
         
         for(int i = k; i < candidates.size(); i++){
+            if(i != k && candidates[i] == candidates[i - 1]) continue;
             if(candidates[i] <= target){
                 current.push_back(candidates[i]);
-                if(find(candidates, target - candidates[i], i + 1, current, res))
-                    res.push_back(current);
+                find(candidates, target - candidates[i], i + 1, current, res);
                 current.pop_back();
             }
         }
