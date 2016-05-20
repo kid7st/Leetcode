@@ -4,28 +4,13 @@ bool knows(int a, int b);
 class Solution {
 public:
     int findCelebrity(int n) {
-        vector<bool> isCelebrity = vector<bool>(n, true);
-        vector<int> count = vector<int>(n, 0);
-        
-        for(int i = 0; i < n - 1; i++){
+        int ans = 0;
+        for(int i = 1; i < n; i++)
+            if(knows(ans, i)) ans = i;
             
-                
-            for(int j = i + 1; j < n; j++){
-                if(isCelebrity[i] && knows(j, i)){
-                    isCelebrity[j] = false;
-                    count[i]++;
-                }
-                
-                if(isCelebrity[j] && knows(i, j)){
-                    isCelebrity[i] = false;
-                    count[j]++;
-                }
-            }
-            
-            if(isCelebrity[i] && count[i])
-                return i;
-        }
-        
-        return -1;
+        for(int i = 0; i < n; i++)
+            if(i != ans && knows(ans, i) || !knows(i, ans))
+                return -1;
+        return ans;
     }
 };
