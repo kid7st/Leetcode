@@ -9,18 +9,21 @@ public:
         
         for(int i = 0; i < n - 1; i++){
             for(int j = i + 1; j < n; j++){
+                if(knows(j, i)){
+                    isCelebrity[j] = false;
+                    count[i]++;
+                }
+                
                 if(knows(i, j)){
                     isCelebrity[i] = false;
                     count[j]++;
                 }
             }
-        }
-        
-        for(int i = 0; i < n; i++){
-            if(isCelebrity[i] && count[i] == n - 1)
+            
+            if(isCelebrity[i] && count[i])
                 return i;
         }
         
-        return -1;
+        return false;
     }
 };
