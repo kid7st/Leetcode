@@ -8,13 +8,15 @@ public:
         vector<int> count = vector<int>(n, 0);
         
         for(int i = 0; i < n - 1; i++){
+            
+                
             for(int j = i + 1; j < n; j++){
-                if(knows(j, i)){
+                if(isCelebrity[i] && knows(j, i)){
                     isCelebrity[j] = false;
                     count[i]++;
                 }
                 
-                if(knows(i, j)){
+                if(isCelebrity[j] && knows(i, j)){
                     isCelebrity[i] = false;
                     count[j]++;
                 }
@@ -24,6 +26,6 @@ public:
                 return i;
         }
         
-        return false;
+        return -1;
     }
 };
