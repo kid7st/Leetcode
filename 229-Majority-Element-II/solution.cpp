@@ -1,42 +1,45 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-        if(nums.size() == 0)
+        return majorityElement(nums, 3);
+    }
+    
+private:
+    vector<int> majorityElement(vector<int>& nums, int k) {
+        if(k < 2 || nums.empty())
             return vector<int>();
-            
-        int candidate1 = nums[0];
-        int candidate2 = nums[1];
-        int count1 = 0;
-        int count2 = 0;
         
+        vector<int> candidates(k - 1, nums[0]);
+        vector<int> counts(k - 1, 0);
         for(int num : nums){
-            if(num == candidate1)
-                count1++;
-            else if(num == candidate2)
-                count2++;
-            else{
-                if(count1 == 0){
-                    candidate1 = num;
-                    count1 = 1;
-                    continue;
-                }else if(count2 == 0){
-                    candidate2 = num;
-                    count2 = 1;
-                    continue;
+            auto pos = find(candidates.begin(), candidates.end(), num);
+            if(pos != candidates.end()){
+                counts[pos - candidates.begin()] += 1;
+            }else{
+                bool find_sign = false;
+                for(auto i = 0; i < counts.size(); i++){
+                    if(counts[i] == 0){
+                        find_sign = true;
+                        candidates[i] = num;
+                        counts[i] = 1;
+                        break;
+                    }
                 }
                 
-                count1--;
-                count2--;
+                if(!find_sign){
+                    for(int i = 0; i < counts.size(); i++)
+                        counts[i] -= 1;
+                }
             }
         }
         
         vector<int> res;
-        int require = nums.size() / 3;
-        if(count1 && count(nums.begin(), nums.end(), candidate1) > require)
-            res.push_back(candidate1);
-        if(count2 && count(nums.begin(), nums.end(), candidate2) > require)
-            res.push_back(candidate2);
-            
+        int require = nums.size() / k;
+        for(int i = 0; i < candidates.size(); i++){
+            if(counts[i] && count(nums.begin(), nums.end(), candidates[i]) > require)
+                res.push_back(candidates[i]);
+        }
+        
         return res;
     }
 };
