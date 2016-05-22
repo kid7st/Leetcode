@@ -10,17 +10,21 @@ public:
         int count2 = 0;
         
         for(int num : nums){
-            if(count1 == 0 && candidate2 != num){
-                candidate1 = num;
-            }else if(count2 == 0 && candidate1 != num){
-                candidate2 = num;
-            }
-            
             if(num == candidate1)
                 count1++;
             else if(num == candidate2)
                 count2++;
             else{
+                if(count1 == 0){
+                    candidate1 = num;
+                    count1 = 1;
+                    continue;
+                }else if(count2 == 0){
+                    candidate2 = num;
+                    count2 = 1;
+                    continue;
+                }
+                
                 count1--;
                 count2--;
             }
