@@ -20,7 +20,7 @@ public:
 	}
 	
 private:
-    unordered_map<int> mp;
+    unordered_map<int, int> mp;
 };
 
 
