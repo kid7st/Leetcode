@@ -20,7 +20,7 @@ public:
 	}
 	
 private:
-    unordered_set<int> set;
+    unordered_map<int> mp;
 };
 
 
