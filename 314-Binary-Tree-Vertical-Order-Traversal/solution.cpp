@@ -12,26 +12,20 @@ public:
     vector<vector<int>> verticalOrder(TreeNode* root) {
         if(root == NULL)
             return vector<vector<int>>();
-            
-        int offset = 0;
-        TreeNode* node =root->left;
-        while(node != NULL){
-            offset += 1;
-            node = node->left;
-        }
-        int len = offset + 1;
-        node = root->right;
-        while(node != NULL){
-            len += 1;
-            node = node->right;
+        
+        vector<vector<int>> res;
+        map<int, vector<int>> mp;
+        
+        bfs(root, mp, 0);
+        
+        for(auto item : mp){
+            res.push_back(item.second);
         }
         
-        vector<vector<int>> res(len, vector<int>());
-        bfs(root, res, offset);
         return res;
     }
 private:
-    void bfs(TreeNode* root, vector<vector<int>>& res, int offset){
+    void bfs(TreeNode* root, map<int, vector<int>>& mp, int offset){
         queue<pair<TreeNode*, int>> bfsQueue;
         bfsQueue.push(pair<TreeNode*, int>(root, offset));
         while(!bfsQueue.empty()){
@@ -39,7 +33,7 @@ private:
             bfsQueue.pop();
             TreeNode* node = pair_node.first;
             int index = pair_node.second;
-            res[index].push_back(node->val);
+            mp[index].push_back(node->val);
             if(node->left != NULL)
                 bfsQueue.push(pair<TreeNode*, int>(node->left, index - 1));
             if(node->right != NULL)
