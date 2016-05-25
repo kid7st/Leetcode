@@ -4,6 +4,7 @@ public:
     // Add the number to an internal data structure.
 	void add(int number) {
 	    mp[number] += 1;
+	    return;
 	}
 
     // Find if there exists any pair of numbers which sum is equal to the value.
