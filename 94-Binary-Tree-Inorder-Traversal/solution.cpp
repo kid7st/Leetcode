@@ -11,21 +11,30 @@ class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> res;
-        stack<TreeNode*> nodeStack; //record the parent node during the traversal
-    
-        TreeNode* p = root;
-        while(p != NULL || !nodeStack.empty()){
-            if(p != NULL){
-                nodeStack.push(p);
-                p = p->left;    //continue to traversal left
+        
+        TreeNode* cur = root, *prev = NULL;
+        while(cur != NULL){
+            if(cur->left == NULL){
+                res.push_back(cur->val);
+                cur = cur->right;
             }else{
-                p = nodeStack.top();    //come back to parent (inorder)
-                nodeStack.pop();    
-                res.push_back(p->val);  
-                p = p->right;   //traverse the right child node
+                //find the predecessor
+                prev = cur->left;
+                while(prev->right != NULL && prev->right != cur)
+                    prev = prev->right;
+                    
+                if(prev->right == NULL){
+                    //set the right child of the prev to current node
+                    prev->right = cur;
+                    cur = cur->left;
+                }else{
+                    //Finish the left child tree, continue to right tree
+                    prev->right = NULL;
+                    res.push_back(cur->val);
+                    cur = cur->right;
+                }
             }
         }
-        
         return res;
     }
     
