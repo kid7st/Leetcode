@@ -12,7 +12,7 @@ public:
 	bool find(int value) {
 	    for(int i = 0; i < nums.size(); i++){
 	        int rest = value - nums[i];
-	        if(index.find(rest) != index.size() && index[rest] != i)
+	        if(index.find(rest) != index.end() && index[rest] != i)
 	            return true;
 	    }
 	    
