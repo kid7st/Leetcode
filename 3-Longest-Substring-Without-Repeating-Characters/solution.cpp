@@ -1,5 +1,5 @@
 /*
-Hashtable and Dp
+Hashtable and DP or two-pointers
 Time O(n)
 Space O(1)
 */
