@@ -3,25 +3,28 @@ public:
 
     // Add the number to an internal data structure.
 	void add(int number) {
-	    index[number] = nums.size();
-	    nums.push_back(number);
+	    numSet.insert(number);
 	    return;
 	}
 
     // Find if there exists any pair of numbers which sum is equal to the value.
 	bool find(int value) {
-	    for(int i = 0; i < nums.size(); i++){
-	        int rest = value - nums[i];
-	        if(index.find(rest) != index.end() && index[rest] != i)
-	            return true;
+	    for(auto num : numSet){
+	        int gap = value - num;
+	        if(gap == num){
+	            if(numSet.count(num) >= 2)
+	                return true;
+	        }else{
+	            if(numSet.find(gap) != numSet.end())
+	                return true;
+	        }
 	    }
 	    
 	    return false;
 	}
 	
 private:
-    vector<int> nums;
-    unordered_map<int, int> index;
+    unordered_multiset<int> numSet;
 };
 
 
