@@ -3,17 +3,16 @@ public:
 
     // Add the number to an internal data structure.
 	void add(int number) {
-	    mp[number] += 1;
+	    index[number] = nums.size();
+	    nums.push_back(number);
 	    return;
 	}
 
     // Find if there exists any pair of numbers which sum is equal to the value.
 	bool find(int value) {
-	    for(auto pair : mp){
-	        int num = pair.second;
-	        if(num == value - num && mp[num] >= 2)
-	            return true;
-	        if(mp.find(value - num) != mp.end())
+	    for(int i = 0; i < nums.size(); i++){
+	        int rest = value - nums[i];
+	        if(index.find(rest) != index.size() && index[rest] != i)
 	            return true;
 	    }
 	    
@@ -21,7 +20,8 @@ public:
 	}
 	
 private:
-    unordered_map<int, int> mp;
+    vector<int> nums;
+    unordered_map<int, int> index;
 };
 
 
