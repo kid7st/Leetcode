@@ -3,22 +3,20 @@ public:
 
     // Add the number to an internal data structure.
 	void add(int number) {
-	    mp[number] += 1;
+	    mp.insert(number);
 	}
 
     // Find if there exists any pair of numbers which sum is equal to the value.
 	bool find(int value) {
-	    for(auto pair : mp){
-	        int num = pair.second;
-	        if(mp.find(value - num) != mp.end())
+	    for(int num : set){
+	        if(set.find(value - num) != set.end())
 	            return true;
 	    }
-	    
 	    return false;
 	}
 	
 private:
-    unordered_map<int, int> mp;
+    unordered_set<int> set;
 };
 
 
