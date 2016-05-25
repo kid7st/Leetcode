@@ -10,8 +10,8 @@ public:
             if(table[i]){
                  count += 1;
                  int j = 2;
-                 for(int j = 2; i*j < n; j++){
-                     table[i*j] = false;
+                 for(int j = i + i; j < n; j += i){
+                     table[j] = false;
                  }
             }
         }
