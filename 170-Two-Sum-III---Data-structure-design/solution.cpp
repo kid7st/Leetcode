@@ -3,15 +3,19 @@ public:
 
     // Add the number to an internal data structure.
 	void add(int number) {
-	    mp.insert(number);
+	    mp[number] += 1;
 	}
 
     // Find if there exists any pair of numbers which sum is equal to the value.
 	bool find(int value) {
-	    for(int num : set){
-	        if(set.find(value - num) != set.end())
+	    for(auto pair : mp){
+	        int num = pair.second;
+	        if(num == value - num && mp[num] >= 2)
+	            return true;
+	        if(mp.find(value - num) != mp.end())
 	            return true;
 	    }
+	    
 	    return false;
 	}
 	
