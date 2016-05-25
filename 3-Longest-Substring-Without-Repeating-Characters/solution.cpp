@@ -9,7 +9,7 @@ public:
         if(s == "")
             return 0;
             
-        vector<int> lastIndex(129, -1);
+        vector<int> lastIndex(256, -1);
         int maxLength = 1;
         
         int j = 0;
