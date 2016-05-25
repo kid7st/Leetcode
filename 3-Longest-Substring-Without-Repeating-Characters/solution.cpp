@@ -15,9 +15,8 @@ public:
         int j = 0;
         lastIndex[s[0]] = 0;
         for(int i = 1; i < s.size(); i++){
-            if(lastIndex[s[i]] != -1){
-                for(int k = j; j <= lastIndex[s[i]]; j++)
-                    lastIndex[j] = -1;
+            if(lastIndex[s[i]] >= j){
+                j = lastIndex[s[i]] += 1;
             }
             lastIndex[s[i]] = i;
             
