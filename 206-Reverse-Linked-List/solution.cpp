@@ -7,25 +7,35 @@
  * };
  */
  
-/* Iteration 
+/* Recursive 
 Time O(N)
-Space O(1)
+Space O(N) recursive stack
 */
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        if(head == NULL)
-            return head;
-            
-        ListNode* prev = NULL;
-        while(head != NULL && head->next != NULL){
-            ListNode* next = head->next;
-            head->next = prev;
-            prev = head;
-            head = next;
+        ListNode* newHead;
+        reverseList(head, &newHead);
+        return newHead;
+    }
+    
+private:
+    ListNode* reverseList(ListNode* head, ListNode** finalHead){
+        if(head == NULL){
+            *finalHead = NULL;
+            return NULL;
         }
-        head->next = prev;
         
-        return head;
+        if(head->next == NULL){
+            *finalHead = head;
+            return head;
+        }
+        
+        ListNode* back = reverseList(head->next, finalHead);
+        back->next = head;
+        back = back->next;
+        back->next = NULL;
+        
+        return back;
     }
 };
