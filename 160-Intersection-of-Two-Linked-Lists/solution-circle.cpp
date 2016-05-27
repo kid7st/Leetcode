@@ -36,7 +36,7 @@ public:
             if(aIsSwitched && bIsSwitched){
                 if(iterA == iterB)
                     return iterA;
-                    
+                
                 if(iterA->next == iterB->next)
                     return iterA->next;
             }
