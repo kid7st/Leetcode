@@ -79,12 +79,6 @@ private:
             iter = iter->next;
         }
         
-        if(second != NULL){
-            iter->next = second;
-            second = second->next;
-            iter = iter->next;
-        }
-        
         return head;        
     }
 };
