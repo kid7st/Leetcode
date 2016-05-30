@@ -56,6 +56,7 @@ private:
             return second;
         if(second == NULL)
             return first;
+            
         ListNode* head = first;
         first = first->next;
         ListNode* iter = head;
