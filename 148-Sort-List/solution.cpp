@@ -51,26 +51,26 @@ private:
         }
         
         ListNode *iter = head;
-        while(left != NULL || right != NULL){
-            if(left != NULL && right != NULL){
-                if(left->val < right->val){
-                    iter->next = left;
-                    left = left->next;
-                    iter = iter->next;
-                }else{
-                    iter->next = right;
-                    right = right->next;
-                    iter = iter->next;
-                }
-            }else if(left != NULL){
+        while(left != NULL && right != NULL){
+            if(left->val < right->val){
                 iter->next = left;
                 left = left->next;
                 iter = iter->next;
-            }else if(right != NULL){
+            }else{
                 iter->next = right;
                 right = right->next;
                 iter = iter->next;
             }
+        }
+        while(left != NULL){
+            iter->next = left;
+            left = left->next;
+            iter = iter->next;
+        }
+        while(right != NULL){
+            iter->next = right;
+            right = right->next;
+            iter = iter->next;
         }
         
         return head;
