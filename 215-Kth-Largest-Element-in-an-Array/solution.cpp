@@ -1,5 +1,6 @@
 /* Quick Select
 Average Time Complexity = O(2N) 
+Space Complexity = O(1)
 */
 
 class Solution {
