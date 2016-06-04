@@ -25,6 +25,9 @@ private:
     }
     
     int partition(vector<int>& nums, int start, int end){
+        int mid = start + (end - start) / 2;
+        swap(nums[mid], nums[end]);
+        
         int pivot = nums[end];
         int i = start - 1;
         for(int j = start; j < end; j++){
