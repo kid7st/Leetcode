@@ -1,3 +1,6 @@
+/* Time Complexity = O(logN + logM) */
+/* Space Complexity = O(NM) */
+
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
