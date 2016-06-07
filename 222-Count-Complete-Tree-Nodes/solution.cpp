@@ -26,8 +26,12 @@ public:
 
 private:
     int treeHeight(TreeNode* root){
-        if(root == NULL)
-            return 0;
-        return treeHeight(root->left) + 1;
+        int count = 0;
+        while(root != NULL){
+            count += 1;
+            root = root->left;
+        }
+        
+        return count;
     }
 };
