@@ -1,15 +1,12 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        if(nums.size() == 0) return 0;
-        
-        int dpRobbed = nums[0];
+        int dpRobbed = 0;
         int dpNoRobbed = 0;
         
-        for(int i = 1; i < nums.size(); i++){
+        for(int num : nums){
             int lastDpRobbed = dpRobbed;
-            dpRobbed = dpNoRobbed + nums[i];
-            
+            dpRobbed = dpNoRobbed + num;
             dpNoRobbed = max(dpNoRobbed, lastDpRobbed);
         }
     
