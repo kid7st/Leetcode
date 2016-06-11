@@ -1,26 +1,19 @@
 class Solution {
 public:
     int nthUglyNumber(int n) {
-        priority_queue<int, vector<int>, greater<int>> pq;
-        
-        pq.push(1);
-        
-        int count = 0;
-        while(true){
-            count++;
-            if(count == n)
-                break;
-                
-            int minUgly = pq.top();
-            while(!pq.empty() && pq.top() == minUgly) pq.pop();
+        if(n == 1) return 1;
+        int l2 = 1, l3 = 1, l5 = 1;
+        vector<int> uglys = {0, 1};
+        while(n > 1){
+            int cur = min( uglys[l2]*2, min(uglys[l3]*3, uglys[l5]*5) );
+            uglys.push_back(cur);
             
-            if(minUgly < INT_MAX / 2)
-                pq.push(minUgly * 2);
-            if(minUgly < INT_MAX / 3)
-                pq.push(minUgly * 3);
-            if(minUgly < INT_MAX / 5)
-                pq.push(minUgly * 5);
+            if(uglys[l2]*2 == cur) l2++;
+            if(uglys[l3]*3 == cur) l3++;
+            if(uglys[l5]*5 == cur) l5++;
+            n--;
         }
-        return pq.top();
+        
+        return uglys.back();
     }
 };
