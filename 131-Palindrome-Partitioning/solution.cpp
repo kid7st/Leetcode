@@ -1,31 +1,30 @@
 class Solution {
 public:
     vector<vector<string>> partition(string s) {
-        if(s.empty())
-            return vector<vector<string>>(1, vector<string>());
-           
-        if(cache.find(s) != cache.end())
-            return cache[s];
-            
         vector<vector<string>> res;
-        for(int i = s.size() - 1; i >= 0; i--){
-            string tail = s.substr(i);
-            if(isPalindrome(tail)){
-                string head = s.substr(0, i);
-                vector<vector<string>> headPartition = partition(head);
-                for(vector<string> part : headPartition){
-                    part.push_back(tail);
-                    res.push_back(part);
-                }
-            }
-        }
-        
-        cache[s] = res;
+        vector<string> acc;
+        dfs(s, acc, res);
         return res;
     }
     
 private:
-    unordered_map< string, vector<vector<string>> > cache;
+    void dfs(string s, vector<string> &acc, vector<vector<string>> &res){
+        if(s.empty()){
+            res.push_back(acc);
+            return;
+        }
+        
+        for(int i = 1; i <= s.size(); i++){
+            string head = s.substr(0, i);
+            if(isPalindrome(head)){
+                acc.push_back(head);
+                dfs(s.substr(i), acc, res);
+                acc.pop_back();
+            }
+        }
+        
+        return;
+    }
     
     bool isPalindrome(string s){
         for(int i = 0; i < s.size() / 2; i++){
