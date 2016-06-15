@@ -3,6 +3,9 @@ public:
     vector<vector<string>> partition(string s) {
         if(s.empty())
             return vector<vector<string>>(1, vector<string>());
+           
+        if(cache.find(s) != cache.end())
+            return cache[s];
             
         vector<vector<string>> res;
         for(int i = s.size() - 1; i >= 0; i--){
@@ -17,10 +20,13 @@ public:
             }
         }
         
+        cache[s] = res;
         return res;
     }
     
 private:
+    unordered_map< string, vector<vector<string>> > cache;
+    
     bool isPalindrome(string s){
         for(int i = 0; i < s.size() / 2; i++){
             if(s[i] != s[s.size() - 1 - i])
