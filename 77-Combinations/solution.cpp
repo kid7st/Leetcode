@@ -14,7 +14,7 @@ private:
             return;
         }
         
-        for(int i = start; i <= n - (k - current.size() - 1); i++){
+        for(int i = start; i <= n; i++){
             current.push_back(i);
             dfs(n, k, i + 1, current, acc);
             current.pop_back();
