@@ -23,7 +23,7 @@ private:
             return true;
         }
         
-        int depthLeft, depthRight;
+        int depthLeft = 0, depthRight = 0;
         bool res = depthTree(root->left, depthLeft) && depthTree(root->right, depthRight);
         depth = max(depthLeft, depthRight) + 1;
         return res && abs(depthLeft - depthRight) <= 1;
