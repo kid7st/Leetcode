@@ -9,17 +9,14 @@ public:
     double next(int val) {
         if(movingQueue.size() < size){
             movingQueue.push(val);
-            sum += val;
-            return double(sum) / double(movingQueue.size());
         }else{
             sum -= movingQueue.front();
             movingQueue.pop();
-            sum += val;
             movingQueue.push(val);
-            return double(sum) / double(movingQueue.size());
         }
         
-        return 0;
+        sum += val;
+        return double(sum) / double(movingQueue.size());
     }
 
 private:
