@@ -18,13 +18,6 @@ public:
                 break;
             }
         }
-        
-        /*
-        if(len > n){
-            for(int j = len; j > n; j--) buf[j] = 0;
-        }
-        */
-        
         return min(len, n);
         
     }
