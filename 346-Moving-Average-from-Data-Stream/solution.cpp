@@ -7,14 +7,11 @@ public:
     }
     
     double next(int val) {
-        if(movingQueue.size() < size){
-            movingQueue.push(val);
-        }else{
+        if(movingQueue.size() >= size){
             sum -= movingQueue.front();
             movingQueue.pop();
-            movingQueue.push(val);
         }
-        
+        movingQueue.push(val);
         sum += val;
         return double(sum) / double(movingQueue.size());
     }
