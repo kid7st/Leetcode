@@ -18,20 +18,21 @@ public:
         vector<vector<int>> res;
         if(!root) return res;
         
-        queue<TreeNode *> nodeQueue;
+        queue<TreeNode *> *nodeQueue = new queue<TreeNode *>;
         int depth = 0;
-        nodeQueue.push(root);
-        while(!nodeQueue.empty()){
+        nodeQueue->push(root);
+        while(!nodeQueue->empty()){
             res.push_back(vector<int>{});
-            queue<TreeNode *> newLayer;
-            while(!nodeQueue.empty()){
-                TreeNode* p = nodeQueue.front();
-                nodeQueue.pop();
+            queue<TreeNode *> *newLayer = new queue<TreeNode *>;
+            while(!nodeQueue->empty()){
+                TreeNode* p = nodeQueue->front();
+                nodeQueue->pop();
                 res[depth].push_back(p->val);
                 
-                if(p->left) newLayer.push(p->left);
-                if(p->right) newLayer.push(p->right);
+                if(p->left) newLayer->push(p->left);
+                if(p->right) newLayer->push(p->right);
             }
+            delete nodeQueue;
             nodeQueue = newLayer;
             depth += 1;
         }
