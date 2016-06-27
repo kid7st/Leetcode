@@ -10,11 +10,6 @@
 class Solution {
 public:
     int minDepth(TreeNode* root) {
-        return bfs(root);
-    }
-    
-private:
-    int bfs(TreeNode* root){
         if(!root) return 0;
         queue<TreeNode*> nodeQueue;
         queue<int> depthQueue;
@@ -41,6 +36,7 @@ private:
                 }
             }
         }
+        
         return minDepth;
     }
 };
