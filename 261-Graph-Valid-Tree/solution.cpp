@@ -1,7 +1,8 @@
 class Solution {
 public:
     bool validTree(int n, vector<pair<int, int>>& edges) {
-        setRoot.resize(n, -1);
+        for(int i = 0; i < n; i++)
+            setRoot.push_back(i);
         for(auto edge : edges){
             int root1 = unionFind(edge.first);
             int root2 = unionFind(edge.second);
@@ -21,9 +22,13 @@ private:
     vector<int> setRoot;
     int unionFind(int node){
         int root = node;
-        while(setRoot[root] != -1 && setRoot[root] != root)
+        while(setRoot[root] != root)
             root = setRoot[root];
-        setRoot[node] = root;
+        while(node != root){
+            int up = setRoot[node];
+            setRoot[node] = root;
+            node = up;
+        }
         return root;
     }
     int unionMerge(int root1, int root2){
