@@ -25,8 +25,8 @@ private:
         setRoot[node] = root;
         return root;
     }
-    int unionMerge(int node1, int node2){
-        setRoot[unionFind(node2)] = unionFind(node1);
-        return setRoot[node1];
+    int unionMerge(int root1, int root2){
+        setRoot[root1] = root2;
+        return setRoot[root1];
     }
 };
