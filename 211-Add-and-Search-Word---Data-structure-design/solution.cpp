@@ -39,11 +39,11 @@ public:
     }
     
     bool search(string word, TrieNode *root){
-        if(root == NULL) 
+        if(root == NULL){
             return false;
-        if(word.size() == 0)
+        }else if(word.empty()){
             return root->isKey;
-        if(word[0] == '.'){
+        }else if(word[0] == '.'){
             bool found = false;
             for(int i = 0; i < 25; i++){
                 found = found | search(word.substr(1), root->children[i]);
