@@ -21,15 +21,10 @@ public:
 private:
     vector<int> setRoot;
     int unionFind(int node){
-        int root = node;
-        while(setRoot[root] != root)
-            root = setRoot[root];
-        while(node != root){
-            int up = setRoot[node];
-            setRoot[node] = root;
-            node = up;
+        if(setRoot[node] != node){
+            setRoot[node] = unionFind(setRoot[node]);
         }
-        return root;
+        return setRoot[node];
     }
     int unionMerge(int root1, int root2){
         setRoot[root1] = root2;
